@@ -1,8 +1,8 @@
 package br.com.caelum.leilao.dominio;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.List;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,7 +47,7 @@ public class LeilaoTest {
 				.comLanceDo(joao, 100)
 				.build();
 		
-		assertEquals(1, leilao.getLances().size());
+		assertThat(leilao.getLances().size(), equalTo(1));
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class LeilaoTest {
 				.comLanceDo(joao, 400)
 				.build();
 		
-		assertEquals(1, leilao.getLances().size());
+		assertThat(leilao.getLances().size(), equalTo(1));
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class LeilaoTest {
 				.comLanceDo(joao, 1300)
 				.build();
 		
-		assertEquals(10, leilao.getLances().size());
+		assertThat(leilao.getLances().size(), equalTo(10));
 	}
 	
 }

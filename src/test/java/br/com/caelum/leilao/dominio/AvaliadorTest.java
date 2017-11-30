@@ -1,5 +1,8 @@
 package br.com.caelum.leilao.dominio;
+
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,14 +40,17 @@ public class AvaliadorTest {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
-		assertEquals(400, leiloeiro.getMaiorLance(), 0.0000001);
-		assertEquals(200, leiloeiro.getMenorLance(), 0.0000001);
-		assertEquals(300, leiloeiro.getValorMedio(), 0.0000001);
+		assertThat(leiloeiro.getMaiorLance(), equalTo(400D));
+		assertThat(leiloeiro.getMenorLance(), equalTo(200D));
+		assertThat(leiloeiro.getValorMedio(), equalTo(300D));
+		
 		List<Lance> lances = leiloeiro.getTop3();
-		assertEquals(3, lances.size());
-		assertEquals(400, lances.get(0).getValor(),0.0000001);
-		assertEquals(300, lances.get(1).getValor(),0.0000001);
-		assertEquals(200, lances.get(2).getValor(),0.0000001);
+		assertThat(lances.size(), equalTo(3));
+		
+		assertThat(lances, hasItems(
+				new Lance(joao, 200D),
+				new Lance(jose, 300D),
+				new Lance(maria, 400D)));
 	}
 	
 	@Test
@@ -57,12 +63,15 @@ public class AvaliadorTest {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
-		assertEquals(200, leiloeiro.getMaiorLance(), 0.0000001);
-		assertEquals(200, leiloeiro.getMenorLance(), 0.0000001);
-		assertEquals(200, leiloeiro.getValorMedio(), 0.0000001);
+		assertThat(leiloeiro.getMaiorLance(), equalTo(200D));
+		assertThat(leiloeiro.getMenorLance(), equalTo(200D));
+		assertThat(leiloeiro.getValorMedio(), equalTo(200D));
+		
 		List<Lance> lances = leiloeiro.getTop3();
-		assertEquals(1, lances.size());
-		assertEquals(200, lances.get(0).getValor(),0.0000001);
+		assertThat(lances.size(), equalTo(1));
+		
+		assertThat(lances, hasItems(
+				new Lance(joao, 200D)));
 	}
 	
 	/*@Test
@@ -91,13 +100,16 @@ public class AvaliadorTest {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
-		assertEquals(300, leiloeiro.getMaiorLance(), 0.0000001);
-		assertEquals(200, leiloeiro.getMenorLance(), 0.0000001);
-		assertEquals(250, leiloeiro.getValorMedio(), 0.0000001);
+		assertThat(leiloeiro.getMaiorLance(), equalTo(300D));
+		assertThat(leiloeiro.getMenorLance(), equalTo(200D));
+		assertThat(leiloeiro.getValorMedio(), equalTo(250D));
+		
 		List<Lance> lances = leiloeiro.getTop3();
-		assertEquals(2, lances.size());
-		assertEquals(300, lances.get(0).getValor(),0.0000001);
-		assertEquals(200, lances.get(1).getValor(),0.0000001);
+		assertThat(lances.size(), equalTo(2));
+		
+		assertThat(lances, hasItems(
+				new Lance(joao, 200D),
+				new Lance(jose, 300D)));
 	}
 	
 	@Test
@@ -114,14 +126,17 @@ public class AvaliadorTest {
 		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
-		assertEquals(600, leiloeiro.getMaiorLance(), 0.0000001);
-		assertEquals(200, leiloeiro.getMenorLance(), 0.0000001);
-		assertEquals(400, leiloeiro.getValorMedio(), 0.0000001);
+		assertThat(leiloeiro.getMaiorLance(), equalTo(600D));
+		assertThat(leiloeiro.getMenorLance(), equalTo(200D));
+		assertThat(leiloeiro.getValorMedio(), equalTo(400D));
+		
 		List<Lance> lances = leiloeiro.getTop3();
-		assertEquals(3, lances.size());
-		assertEquals(600, lances.get(0).getValor(),0.0000001);
-		assertEquals(500, lances.get(1).getValor(),0.0000001);
-		assertEquals(400, lances.get(2).getValor(),0.0000001);
+		assertThat(lances.size(), equalTo(3));
+		
+		assertThat(lances, hasItems(
+				new Lance(jose, 600D),
+				new Lance(joao, 500D),
+				new Lance(maria, 400D)));
 	}
 	
 	@Test
